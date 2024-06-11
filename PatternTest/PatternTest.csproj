@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Abstract Factory\Abstract Factory.csproj" />
+    <ProjectReference Include="..\Builder\Builder.csproj" />
     <ProjectReference Include="..\Factory Method\Factory Method.csproj" />
   </ItemGroup>
 

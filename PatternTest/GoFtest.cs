@@ -1,5 +1,7 @@
 using Factory_Method;
 using Abstract_Factory;
+using Builder;
+using Builder.Service;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -43,6 +45,25 @@ namespace PatternTest
             _outputHelper.WriteLine(Assert.Throws<ArgumentNullException>(() => _outputHelper.WriteLine(program.Play(null, "Archer"))).Message);
             _outputHelper.WriteLine(Assert.Throws<ArgumentNullException>(() => _outputHelper.WriteLine(program.Play("Red", null))).Message);
             _outputHelper.WriteLine(Assert.Throws<ArgumentNullException>(() => _outputHelper.WriteLine(program.Play(null, null))).Message);
+        }
+        [Fact]
+        public void Builder_MakeProductionResult()
+        {
+            AndroidDeveloper androidDeveloper = new AndroidDeveloper();
+            MakeProductionPhone product = new MakeProductionPhone(androidDeveloper);
+            _outputHelper.WriteLine(product.MakePhone());
+
+            IOSDeveloper iOSDeveloper = new IOSDeveloper();
+            product = new MakeProductionPhone(iOSDeveloper);
+            _outputHelper.WriteLine(product.MakePhone());
+
+            WindowsDeveloper windowsDeveloper = new WindowsDeveloper();
+            product = new MakeProductionPhone(windowsDeveloper);
+            _outputHelper.WriteLine(Assert.Throws<NotImplementedException>(() => _outputHelper.WriteLine(product.MakePhone())).Message);
+
+            product = new MakeProductionPhone(null);
+            _outputHelper.WriteLine(Assert.Throws<ArgumentNullException>(() => _outputHelper.WriteLine(product.MakePhone())).Message);
+
         }
     }
 }
